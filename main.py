@@ -42,5 +42,5 @@ with open(source_file, "r") as sf, open(target_file, "w") as tf:
 
 
 subprocess.run(['g++', 'output.cpp', '-o', 'output'])
-os.remove('output.cpp')
+# os.remove('output.cpp')
 subprocess.run(['./output'])

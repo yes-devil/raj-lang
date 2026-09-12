@@ -3,7 +3,7 @@ int main(){
     int b=4;
     ask(a;;b)
     int c = a+b;
-    say(a;; " + ";; b;; " = ";; c)
-
+    sayln(a;; " + ";; b;; " = ";; c)
+    sayln()
     return 0;
 }

@@ -7,7 +7,7 @@ source_file = sys.argv[1]
 target_file = "output.cpp"
 
 if not(source_file[-4:]==".raj"):
-    print("Not a .my file")
+    print("Not a .raj file")
     exit(0)
 
 def _say(line):
@@ -27,6 +27,26 @@ def _say(line):
     parts = re.findall(r'"[^"]*"|\'[^\']*\'|[^;;]+', args)
 
     return '\t' + 'cout << ' + ' << '.join(p.strip() for p in parts) + ';' + '\n'
+
+def _sayln(line):
+    match = re.match(r'\s*sayln\((.*)\)\s*', line)
+
+    if not match:
+        return line
+
+    args = match.group(1)
+    if len(args) == 0:
+        return '\t' + 'cout << endl;' + '\n'
+
+    args = re.sub(
+        r'sum\(\s*([^,]+)\s*,\s*([^)]+)\)',
+        r'(\1 + \2)',
+        args
+    )
+
+    parts = re.findall(r'"[^"]*"|\'[^\']*\'|[^;;]+', args)
+
+    return '\t' + 'cout << ' + ' << '.join(p.strip() for p in parts) + ' << endl;' + '\n'
 
 
 def _ask(line):
@@ -52,16 +72,19 @@ with open(source_file, "r") as sf, open(target_file, "w") as tf:
     tf.write("#include<iostream>\n")
     tf.write("using namespace std;\n")
     for line in sf:
-        if "  say(" in line:
+        if "   say(" in line:
             result = _say(line)
             # print(result)
             tf.write(result)
             # tf.write("\tline with say\n")
-        elif "  ask(" in line:
+        elif "   ask(" in line:
             result = _ask(line)
             # print(result)
             tf.write(result)
             # tf.write("\tline with say\n")
+        elif "   sayln(" in line:
+            result = _sayln(line)
+            tf.write(result)
         else:
             tf.write(line)
 

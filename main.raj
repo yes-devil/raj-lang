@@ -4,6 +4,6 @@ int main(){
     ask(a;;b)
     int c = a+b;
     sayln(a;; " + ";; b;; " = ";; c)
-    sayln()
+    // sayln()
     return 0;
 }

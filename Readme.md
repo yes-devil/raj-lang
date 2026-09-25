@@ -1,5 +1,9 @@
-This repo is hosts the source codes of "raj" programming language. 
+# About
+This repo hosts the source codes of "raj" programming language.
+
 "Raj" is a general purpose programming language that is built over the "C++" language to make the "C++" developmet smoother.
+
+```Raj``` is just in development phase. No stable release is publiced yet.
 
 ```main.raj``` is just for trial.
 

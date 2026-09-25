@@ -1,6 +1,7 @@
 int main(){
     int a=5;
     int b=4;
+    say("Enter 2 numbers: ")
     ask(a;;b)
     int c = a+b;
     sayln(a;; " + ";; b;; " = ";; c)

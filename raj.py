@@ -26,7 +26,7 @@ def _say(line):
 
     parts = re.findall(r'"[^"]*"|\'[^\']*\'|[^;;]+', args)
 
-    return '\t' + 'cout << ' + ' << '.join(p.strip() for p in parts) + ';' + '\n'
+    return '\t' + 'std::cout << ' + ' << '.join(p.strip() for p in parts) + ';' + '\n'
 
 def _sayln(line):
     match = re.match(r'\s*sayln\((.*)\)\s*', line)
@@ -36,7 +36,7 @@ def _sayln(line):
 
     args = match.group(1)
     if len(args) == 0:
-        return '\t' + 'cout << endl;' + '\n'
+        return '\t' + 'std::cout << endl;' + '\n'
 
     args = re.sub(
         r'sum\(\s*([^,]+)\s*,\s*([^)]+)\)',
@@ -46,7 +46,7 @@ def _sayln(line):
 
     parts = re.findall(r'"[^"]*"|\'[^\']*\'|[^;;]+', args)
 
-    return '\t' + 'cout << ' + ' << '.join(p.strip() for p in parts) + ' << endl;' + '\n'
+    return '\t' + 'std::cout << ' + ' << '.join(p.strip() for p in parts) + ' << endl;' + '\n'
 
 
 def _ask(line):
@@ -65,12 +65,12 @@ def _ask(line):
 
     parts = re.findall(r'"[^"]*"|\'[^\']*\'|[^;;]+', args)
 
-    return '\t' + 'cin >> ' + ' >> '.join(p.strip() for p in parts) + ';' + '\n'
+    return '\t' + 'std::cin >> ' + ' >> '.join(p.strip() for p in parts) + ';' + '\n'
 
 
 with open(source_file, "r") as sf, open(target_file, "w") as tf:
     tf.write("#include<iostream>\n")
-    tf.write("using namespace std;\n")
+    # tf.write("using namespace std;\n")
     for line in sf:
         if "   say(" in line:
             result = _say(line)
@@ -85,10 +85,11 @@ with open(source_file, "r") as sf, open(target_file, "w") as tf:
         elif "   sayln(" in line:
             result = _sayln(line)
             tf.write(result)
+        # elif "#use " in line:
         else:
             tf.write(line)
 
 
 subprocess.run(['g++', 'output.cpp', '-o', 'output'])
-os.remove('output.cpp')
+# os.remove('output.cpp')
 subprocess.run(['./output'])

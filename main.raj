@@ -1,10 +1,17 @@
+use cmath
+use raj arithmetic
+let max 40
+
 int main(){
     int a=5;
     int b=4;
     say("Enter 2 numbers: ")
     ask(a;;b)
-    int c = a+b;
+    int c = raj::arithmetic::add(a,b);
     sayln(a;; " + ";; b;; " = ";; c)
     // sayln()
+    sayln("  sayln( is working")
+    sayln(max)
+    sayln("Now it should work good.")
     return 0;
 }

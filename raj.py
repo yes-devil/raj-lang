@@ -6,7 +6,7 @@ from pathlib import Path
 
 source_file = sys.argv[1]
 target_file = str(Path("~/raj-language/temp/output.cpp").expanduser())
-# print(target_file)
+print(target_file)
 
 if not(source_file[-4:]==".raj"):
     print("Not a .raj file")
@@ -86,8 +86,8 @@ def _let(line):
 with open(source_file, "r") as sf, open(target_file, "w") as tf:
     tf.write("#include<iostream>\n")
     # tf.write("using namespace std;\n")
+        
     for line in sf:
-        # result = ""
         if "   say(" in line:
             result = _say(line)
             # print(result)
@@ -107,6 +107,8 @@ with open(source_file, "r") as sf, open(target_file, "w") as tf:
         elif line[0:3] == "let":
             result = _let(line)
             tf.write(result)
+        elif line == "};\n":
+            tf.write("}\n")
 
         else:
             tf.write(line)

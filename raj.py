@@ -107,8 +107,6 @@ with open(source_file, "r") as sf, open(target_file, "w") as tf:
         elif line[0:3] == "let":
             result = _let(line)
             tf.write(result)
-        elif line == "};\n":
-            tf.write("}\n")
 
         else:
             tf.write(line)

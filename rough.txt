@@ -1,0 +1,2 @@
+linux-debian build command:
+python3 -m PyInstaller --onefile --name raj-linux-debian --distpath dist/linux-debian --workpath build/linux-debian raj.py
